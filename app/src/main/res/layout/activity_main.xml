@@ -1,0 +1,336 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <!-- Top Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Player 4 (Top Left) -->
+            <LinearLayout
+                android:id="@+id/boxPlayer4"
+                android:layout_width="100dp"
+                android:layout_height="125dp"
+                android:background="@drawable/player_box_outer"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:id="@+id/innerBox4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/player_box_inner"
+                    android:padding="8dp">
+
+                    <FrameLayout
+                        android:id="@+id/diceContainer4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dice_face_bg"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/tvDiceResult4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="?"
+                            android:textColor="#513B22"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/ivDiceGif4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvPlayer4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Player 4"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivPlayIndicator4"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:src="@android:drawable/ic_media_play"
+                android:visibility="invisible"
+                app2:tint="#9C27B0" />
+
+            <!-- Turn Status Indicator moved to header -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="Player 1's Turn"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivPlayIndicator3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="4dp"
+                android:rotation="180"
+                android:src="@android:drawable/ic_media_play"
+                android:visibility="invisible"
+                app2:tint="#2196F3" />
+
+            <!-- Player 3 (Top Right) -->
+            <LinearLayout
+                android:id="@+id/boxPlayer3"
+                android:layout_width="100dp"
+                android:layout_height="125dp"
+                android:background="@drawable/player_box_outer"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:id="@+id/innerBox3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/player_box_inner"
+                    android:padding="8dp">
+
+                    <FrameLayout
+                        android:id="@+id/diceContainer3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dice_face_bg"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/tvDiceResult3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="?"
+                            android:textColor="#513B22"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/ivDiceGif3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvPlayer3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Player 3"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Middle Row -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6.0"
+            android:background="@android:color/transparent">
+
+            <com.loyltworks.snakeandladdergame.GameView
+                android:id="@+id/gameView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
+
+        </FrameLayout>
+
+        <!-- Bottom Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Player 2 (Bottom Left) -->
+            <LinearLayout
+                android:id="@+id/boxPlayer2"
+                android:layout_width="100dp"
+                android:layout_height="125dp"
+                android:background="@drawable/player_box_outer"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:id="@+id/innerBox2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/player_box_inner"
+                    android:padding="8dp">
+
+                    <FrameLayout
+                        android:id="@+id/diceContainer2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dice_face_bg"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/tvDiceResult2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="?"
+                            android:textColor="#513B22"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/ivDiceGif2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvPlayer2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Player 2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivPlayIndicator2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:src="@android:drawable/ic_media_play"
+                android:visibility="invisible"
+                app2:tint="#4CAF50" />
+
+            <!-- Flexible Space to push Player 1 to the right -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/ivPlayIndicator1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginRight="4dp"
+                android:rotation="180"
+                android:src="@android:drawable/ic_media_play"
+                android:visibility="invisible"
+                app2:tint="#F44336" />
+
+            <!-- Player 1 (Bottom Right) -->
+            <LinearLayout
+                android:id="@+id/boxPlayer1"
+                android:layout_width="100dp"
+                android:layout_height="125dp"
+                android:background="@drawable/player_box_outer"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:id="@+id/innerBox1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/player_box_inner"
+                    android:padding="8dp">
+
+                    <FrameLayout
+                        android:id="@+id/diceContainer1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/dice_face_bg"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:id="@+id/tvDiceResult1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="?"
+                            android:textColor="#513B22"
+                            android:textSize="32sp"
+                            android:textStyle="bold" />
+
+                        <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/ivDiceGif1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone" />
+                    </FrameLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvPlayer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="serif"
+                    android:gravity="center"
+                    android:text="Player 1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

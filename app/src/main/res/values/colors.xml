@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="player1">#E91E63</color>
+    <color name="player2">#2196F3</color>
+    <color name="board_light">#E0E0E0</color>
+    <color name="board_dark">#BDBDBD</color>
+    <color name="accent">#FFC107</color>
+    <color name="primary">#6200EE</color>
+    <color name="primaryVariant">#3700B3</color>
+    <color name="secondary">#03DAC6</color>
+</resources>

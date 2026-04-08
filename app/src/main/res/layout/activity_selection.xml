@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app1="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_img"
+    tools:context=".SelectionActivity">
+
+    <!-- Premium Background Overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_launcher_background"
+        android:alpha="0.1"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/tvTitleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="SNAKE &amp; LADDER"
+        android:textColor="#FFEB3B"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.05"
+        android:layout_centerHorizontal="true"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="10"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app1:cardBackgroundColor="@null"
+        android:layout_centerInParent="true"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectMode">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn2P"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="16dp"
+                android:text="2 Players"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#6D4C41"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_launcher_foreground"
+                app:iconGravity="textStart"
+                app:iconSize="24dp"
+                app:iconPadding="12dp" />
+
+            <Button
+                android:id="@+id/btn3P"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="16dp"
+                android:text="3 Players"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#795548"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_launcher_foreground"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp" />
+
+            <Button
+                android:id="@+id/btn4P"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="24dp"
+                android:text="4 Players"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#8D6E63"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_launcher_foreground"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:alpha="0.2"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/btnAI"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Versus AI"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="#673AB7"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_launcher_foreground"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
