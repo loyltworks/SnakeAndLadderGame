@@ -9,6 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.SystemBarStyle
+import android.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import pl.droidsonroids.gif.GifDrawable
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val playerIndicators = arrayOfNulls<ImageView>(4)
     private val diceGifViews = arrayOfNulls<GifImageView>(4)
     private val diceContainers = arrayOfNulls<View>(4)
+    private val playerNames = arrayOfNulls<TextView>(4)
 
     private var playerPos = IntArray(4) { 1 }
     private var currentPlayerIdx = 0
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -88,6 +91,11 @@ class MainActivity : AppCompatActivity() {
         diceContainers[2] = findViewById(R.id.diceContainer3)
         diceContainers[3] = findViewById(R.id.diceContainer4)
 
+        playerNames[0] = findViewById(R.id.tvPlayer1)
+        playerNames[1] = findViewById(R.id.tvPlayer2)
+        playerNames[2] = findViewById(R.id.tvPlayer3)
+        playerNames[3] = findViewById(R.id.tvPlayer4)
+
         // Game mode selection from Intent
         numPlayers = intent.getIntExtra("numPlayers", 2)
         isVSai = intent.getBooleanExtra("isVSai", false)
@@ -119,6 +127,16 @@ class MainActivity : AppCompatActivity() {
         numPlayers = count
         isVSai = vsAi
         resetGame()
+        
+        // Update names if VS AI
+        if (isVSai) {
+            playerNames[0]?.text = "You"
+            playerNames[1]?.text = "Computer"
+        } else {
+            for (i in 0 until 4) {
+                playerNames[i]?.text = "Player ${i + 1}"
+            }
+        }
         
         // Hide unused boxes
         for (i in 0 until 4) {
@@ -273,12 +291,22 @@ class MainActivity : AppCompatActivity() {
     private fun checkWinCondition() {
         if (playerPos[currentPlayerIdx] == 100) {
             isGameOver = true
-            Toast.makeText(this, "Game Over! Winner: Player ${currentPlayerIdx + 1}", Toast.LENGTH_LONG).show()
+            val winnerName = if (isVSai) {
+                if (currentPlayerIdx == 0) "YOU" else "COMPUTER"
+            } else {
+                "Player ${currentPlayerIdx + 1}"
+            }
+            Toast.makeText(this, "Game Over! Winner: $winnerName", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun updateStatusUI() {
-        tvStatus?.text = "Player ${currentPlayerIdx + 1}'s Turn"
+        val currentName = if (isVSai) {
+            if (currentPlayerIdx == 0) "Your Turn" else "Computer's Turn"
+        } else {
+            "Player ${currentPlayerIdx + 1}'s Turn"
+        }
+        tvStatus?.text = currentName
         
         // Show indicator and dice area for current player only
         for (i in 0 until 4) {
