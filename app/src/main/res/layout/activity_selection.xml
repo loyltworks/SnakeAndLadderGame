@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app1="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_img"
     tools:context=".SelectionActivity">
 
@@ -12,115 +11,266 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_launcher_background"
         android:alpha="0.1"
-        android:scaleType="centerCrop"/>
+        android:background="@drawable/ic_launcher_background"
+        android:scaleType="centerCrop" />
 
-    <TextView
-        android:id="@+id/tvTitleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="SNAKE &amp; LADDER"
-        android:textColor="#FFEB3B"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:letterSpacing="0.05"
-        android:layout_centerHorizontal="true"
-        android:shadowColor="#000000"
-        android:shadowDx="2"
-        android:shadowDy="2"
-        android:shadowRadius="10"/>
-
-    <androidx.cardview.widget.CardView
+    <!-- Mode Selection Layout -->
+    <LinearLayout
+        android:id="@+id/layoutModeSelection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="12dp"
-        app1:cardBackgroundColor="@null"
-        android:layout_centerInParent="true"
-        app:layout_constraintTop_toBottomOf="@+id/tvSelectMode">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="48dp">
+
+        <!-- PLAY WITH FRIENDS Button -->
+        <FrameLayout
+            android:id="@+id/btnPlayWithFriends"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/player_box_outer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/player_box_inner">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/playwithfriends" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="PLAY WITH FRIENDS"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- VERSUS AI Button -->
+        <FrameLayout
+            android:id="@+id/btnVersusAi"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/player_box_outer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/player_box_inner">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/computer" />
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:text="VERSUS AI"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+    <!-- Player Selection Layout -->
+    <FrameLayout
+        android:id="@+id/layoutPlayerSelection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/btnHome"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/player_box_outer"
+            android:src="@drawable/home" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="32dp"
+            android:background="@drawable/player_box_outer"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center">
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/btn2P"
-                style="@style/Widget.MaterialComponents.Button"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="16dp"
-                android:text="2 Players"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="#6D4C41"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_launcher_foreground"
-                app:iconGravity="textStart"
-                app:iconSize="24dp"
-                app:iconPadding="12dp" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="SELECT PLAYERS"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn3P"
-                style="@style/Widget.MaterialComponents.Button"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="16dp"
-                android:text="3 Players"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="#795548"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_launcher_foreground"
-                app:iconGravity="textStart"
-                app:iconPadding="12dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/player_box_inner"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp">
 
-            <Button
-                android:id="@+id/btn4P"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:layout_marginBottom="24dp"
-                android:text="4 Players"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="#8D6E63"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_launcher_foreground"
-                app:iconGravity="textStart"
-                app:iconPadding="12dp" />
+                <!-- 2 Players Option -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"
-                android:alpha="0.2"
-                android:layout_marginBottom="24dp"/>
+                    <FrameLayout
+                        android:id="@+id/btn2Players"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:alpha="1.0">
 
-            <Button
-                android:id="@+id/btnAI"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:text="Versus AI"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="#673AB7"
-                app:cornerRadius="16dp"
-                app:icon="@drawable/ic_launcher_foreground"
-                app:iconGravity="textStart"
-                app:iconPadding="12dp" />
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/two_player" />
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/ivTick2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/tick"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <!-- 3 Players Option -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/btn3Players"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:alpha="1.0">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/three_player" />
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/ivTick3"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/tick"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <!-- 4 Players Option -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:id="@+id/btn4Players"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:alpha="1.0">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/four_player" />
+                    </FrameLayout>
+
+                    <ImageView
+                        android:id="@+id/ivTick4"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/tick"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- PLAY Button inside the box -->
+            <FrameLayout
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/wooden_box_bg"
+                android:paddingHorizontal="48dp"
+                android:paddingVertical="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="PLAY"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
-</RelativeLayout>
+</FrameLayout>
