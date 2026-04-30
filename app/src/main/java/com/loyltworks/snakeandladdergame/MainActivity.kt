@@ -16,6 +16,10 @@ import androidx.core.view.WindowInsetsCompat
 import pl.droidsonroids.gif.GifDrawable
 import pl.droidsonroids.gif.GifImageView
 import kotlin.random.Random
+import android.app.Dialog
+import android.view.Window
+import android.graphics.drawable.ColorDrawable
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,8 +63,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            // Only apply side and bottom padding. Top padding is handled by the layout header or removed for tighter fit.
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        // Header buttons
+        findViewById<View>(R.id.btnReset)?.setOnClickListener {
+            resetGame()
+        }
+        findViewById<View>(R.id.btnHome)?.setOnClickListener {
+            finish()
         }
 
         gameView = findViewById(R.id.gameView)
@@ -291,13 +304,42 @@ class MainActivity : AppCompatActivity() {
     private fun checkWinCondition() {
         if (playerPos[currentPlayerIdx] == 100) {
             isGameOver = true
-            val winnerName = if (isVSai) {
-                if (currentPlayerIdx == 0) "YOU" else "COMPUTER"
-            } else {
-                "Player ${currentPlayerIdx + 1}"
-            }
-            Toast.makeText(this, "Game Over! Winner: $winnerName", Toast.LENGTH_LONG).show()
+            showWinDialog(currentPlayerIdx)
         }
+    }
+
+    private fun showWinDialog(winnerIdx: Int) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_win)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+
+        val ivWinnerPlayerIcon = dialog.findViewById<ImageView>(R.id.ivWinnerPlayerIcon)
+        val btnBack = dialog.findViewById<Button>(R.id.btnWinBack)
+        val btnPlayAgain = dialog.findViewById<Button>(R.id.btnWinPlayAgain)
+
+        // Set correct player icon
+        val playerIconRes = when (winnerIdx) {
+            0 -> R.drawable.red_player
+            1 -> R.drawable.blue_player
+            2 -> R.drawable.green_player
+            3 -> R.drawable.white_player
+            else -> R.drawable.red_player
+        }
+        ivWinnerPlayerIcon.setImageResource(playerIconRes)
+
+        btnBack.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+
+        btnPlayAgain.setOnClickListener {
+            dialog.dismiss()
+            resetGame()
+        }
+
+        dialog.show()
     }
 
     private fun updateStatusUI() {

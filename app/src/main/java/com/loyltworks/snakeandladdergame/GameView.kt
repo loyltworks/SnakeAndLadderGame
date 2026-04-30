@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
+import pl.droidsonroids.gif.GifDrawable
 
 class GameView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -25,6 +26,10 @@ class GameView @JvmOverloads constructor(
     private var orangeSnakeImg: Drawable? = null
     private var purpleSnakeImg: Drawable? = null
     private var blueSnakeImg: Drawable? = null
+    
+    private var snakeGifs = mutableMapOf<Int, GifDrawable?>()
+    private var activeSnakeHead: Int? = null
+    private var activeSnakeGif: GifDrawable? = null
     
     private var ladderImgs = mutableMapOf<Int, Drawable?>()
     private var playerImgs = arrayOfNulls<Drawable>(4)
@@ -48,6 +53,32 @@ class GameView @JvmOverloads constructor(
             playerImgs[1] = ContextCompat.getDrawable(context, R.drawable.blue_player)
             playerImgs[2] = ContextCompat.getDrawable(context, R.drawable.green_player)
             playerImgs[3] = ContextCompat.getDrawable(context, R.drawable.white_player)
+
+            // Initialize Snake GIFs
+            snakeGifs[98] = GifDrawable(resources, R.raw.red_snake)
+            snakeGifs[85] = GifDrawable(resources, R.raw.green_snake)
+            snakeGifs[61] = GifDrawable(resources, R.raw.blue_snake)
+            snakeGifs[54] = GifDrawable(resources, R.raw.orenge_snake)
+            snakeGifs[32] = GifDrawable(resources, R.raw.purple_snake)
+            
+            // Set callbacks for GIFs to ensure they animate
+            snakeGifs.values.forEach { gif ->
+                gif?.callback = object : Drawable.Callback {
+                    override fun invalidateDrawable(who: Drawable) {
+                        // Only invalidate if this is the currently active animation to save resources
+                        if (activeSnakeHead != null) {
+                            postInvalidateOnAnimation()
+                        }
+                    }
+                    override fun scheduleDrawable(who: Drawable, what: Runnable, `when`: Long) {
+                        postDelayed(what, `when`)
+                    }
+                    override fun unscheduleDrawable(who: Drawable, what: Runnable) {
+                        removeCallbacks(what)
+                    }
+                }
+                gif?.stop() // Don't play until needed
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -64,7 +95,7 @@ class GameView @JvmOverloads constructor(
         85 to 52,  // Green
         61 to 40,  // Blue
         54 to 16,  // Orange
-        32 to 7     // Purple
+        32 to 7    // Purple
     )
     private val ladders = mapOf(
         3 to 24,
@@ -104,6 +135,90 @@ class GameView @JvmOverloads constructor(
         drawSnakes(canvas)
         drawLadders(canvas)
         drawPlayers(canvas)
+        drawActiveSnakeGif(canvas)
+    }
+
+    private fun drawActiveSnakeGif(canvas: Canvas) {
+        val start = activeSnakeHead ?: return
+        val gif = snakeGifs[start] ?: return
+        val end = snakes[start] ?: return
+
+        val staticImg = when (start) {
+            98 -> redSnakeImg
+            85 -> greenSnakeImg
+            61 -> blueSnakeImg
+            54 -> orangeSnakeImg
+            32 -> purpleSnakeImg
+            else -> redSnakeImg
+        } ?: return
+
+        var (sx, sy) = getCoords(start)
+        var (ex, ey) = getCoords(end)
+
+        val dx = ex - sx
+        val dy = ey - sy
+        val length = Math.hypot(dx.toDouble(), dy.toDouble()).toFloat()
+        val nx = if (length > 0) dx / length else 0f
+        val ny = if (length > 0) dy / length else 0f
+
+        val shiftDist = cellHeight * 0.35f
+        var adjSx = sx - nx * shiftDist
+        var adjSy = sy - ny * shiftDist
+        var adjEx = ex + nx * shiftDist
+        var adjEy = ey + ny * shiftDist
+
+        // Apply same visual adjustments as drawSnakes
+        if (start == 54) {
+           adjSx = sx + (cellWidth * 0.60f)
+           adjSy = sy + (cellHeight * 0.80f)
+           adjEx = adjSx - (cellWidth * 3.20f)
+           adjEy = adjSy + (cellHeight * 2.40f)
+        }
+        if (start == 98) {
+            adjSx = sx + nx * (shiftDist * 0.3f)
+            adjSy = sy + ny * (shiftDist * 0.3f)
+            adjEx = ex + (cellWidth * 0.8f)
+            adjEy = ey
+        }
+        if (start == 61) {
+            adjSx = sx + cellWidth * 0.45f
+            adjEx = ex + cellWidth * 0.45f
+        }
+        if (start == 32) {
+            val spoofS = getCoords(33)
+            val spoofE = getCoords(8)
+            adjSx = spoofS.first
+            adjSy = spoofS.second
+            adjEx = spoofE.first
+            adjEy = spoofE.second
+        }
+        if (start == 85) {
+            adjSx = sx + (cellWidth * 0.9f)
+            adjSy = sy - (cellHeight * 0.4f)
+            adjEx = ex - (cellWidth * 1.0f)
+            adjEy = ey + (cellHeight * 0.4f)
+        }
+
+        val adjDx = adjEx - adjSx
+        val adjDy = adjEy - adjSy
+        val adjDistance = Math.hypot(adjDx.toDouble(), adjDy.toDouble()).toFloat()
+        val angle = Math.toDegrees(Math.atan2(adjDy.toDouble(), adjDx.toDouble())).toFloat()
+        
+        // Use GIF's own intrinsic aspect ratio with a fallback to static image to prevent 0-size issues
+        val gifW = gif.intrinsicWidth.toFloat()
+        val gifH = gif.intrinsicHeight.toFloat()
+        val aspect = if (gifH > 0) gifW / gifH else (staticImg.intrinsicWidth.toFloat() / staticImg.intrinsicHeight.toFloat())
+        
+        var thickness = adjDistance * aspect
+        val minT = if (start == 98) cellWidth * 1.5f else cellWidth * 0.6f
+        thickness = thickness.coerceIn(minT, cellWidth * 2.5f)
+        
+        canvas.save()
+        canvas.translate(adjSx, adjSy)
+        canvas.rotate(angle - 90f)
+        gif.setBounds((-thickness / 2).toInt(), 0, (thickness / 2).toInt(), adjDistance.toInt())
+        gif.draw(canvas)
+        canvas.restore()
     }
 
     private fun drawBackground(canvas: Canvas) {
@@ -254,6 +369,8 @@ class GameView @JvmOverloads constructor(
 
     private fun drawSnakes(canvas: Canvas) {
         for ((start, end) in snakes) {
+            if (start == activeSnakeHead) continue // Hide static snake during GIF animation
+            
             val img = when (start) {
                 98 -> redSnakeImg
                 85 -> greenSnakeImg
@@ -382,7 +499,7 @@ class GameView @JvmOverloads constructor(
                 val aspect = if (imgH > 0) imgW / imgH else 1.0f
                 
                 // User requested reducing scale to make them look cleaner. 0.4f scales down from old 0.5f.
-                var targetHeight = cellHeight * 0.4f
+                var targetHeight = cellHeight * 0.4f * playerScales[idx]
                 if (count > 1) targetHeight *= 0.75f
                 val targetWidth = targetHeight * aspect
                 
@@ -473,35 +590,58 @@ class GameView @JvmOverloads constructor(
     }
 
     fun playSnakeBiteAnimation(start: Int, end: Int, playerIdx: Int, onAnimationEnd: () -> Unit) {
-        val (startX, startY) = getCoords(start)
-        val (endX, endY) = getCoords(end)
+        // Step 1: Show the GIF and play immediately
+        activeSnakeHead = start
+        val gif = snakeGifs[start]
+        activeSnakeGif = gif
         
-        // Emulate sliding down the snake's body with a smooth, accelerating translation map.
-        val slideAnim = ValueAnimator.ofFloat(0f, 1f)
-        slideAnim.duration = 1200L // 1.2 seconds for a dramatic slide
-        slideAnim.interpolator = android.view.animation.AccelerateDecelerateInterpolator()
-        
-        slideAnim.addUpdateListener { animation ->
-            val fraction = animation.animatedValue as Float
-            val currentX = startX + (endX - startX) * fraction
-            val currentY = startY + (endY - startY) * fraction
-            
-            // Constantly update the physical coordinates for drawPlayers to pick up
-            playerCoords[playerIdx] = Pair(currentX, currentY)
-            invalidate()
-        }
-        
-        slideAnim.addListener(object : android.animation.AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: android.animation.Animator) {
-                // Securely snap the final state to the end box
-                playerPos[playerIdx] = end
-                playerCoords[playerIdx] = getCoords(end)
+        // Robust reset: stop, set loop, seek to 0, and then start
+        gif?.stop()
+        gif?.loopCount = 0 // Infinite loop during the animation window
+        gif?.seekTo(0)
+        gif?.setVisible(true, true)
+        gif?.start()
+        postInvalidateOnAnimation()
+
+        // Step 2: Delay slightly before shrinking player to sync with snake mouth opening
+        postDelayed({
+            val shrinkAnim = ValueAnimator.ofFloat(1f, 0f)
+            shrinkAnim.duration = 500L
+            shrinkAnim.addUpdateListener { animation ->
+                playerScales[playerIdx] = animation.animatedValue as Float
                 invalidate()
-                onAnimationEnd()
             }
-        })
+            shrinkAnim.start()
+        }, 300L) // 300ms delay allows the snake to open its mouth before player shrinks
         
-        slideAnim.start()
+        // Step 3: Wait for 2 seconds (total GIF time)
+        postDelayed({
+            // Step 4: Teleport player to tail
+            playerPos[playerIdx] = end
+            playerCoords[playerIdx] = getCoords(end)
+            
+            // Step 5: Hide GIF and stop it
+            activeSnakeHead = null
+            activeSnakeGif?.stop()
+            activeSnakeGif = null
+            invalidate()
+
+            // Step 6: Grow player at tail (0.5s)
+            val growAnim = ValueAnimator.ofFloat(0f, 1f)
+            growAnim.duration = 500L
+            growAnim.addUpdateListener { anim ->
+                playerScales[playerIdx] = anim.animatedValue as Float
+                invalidate()
+            }
+            
+            growAnim.addListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    onAnimationEnd()
+                }
+            })
+            growAnim.start()
+            
+        }, 2000L) // Exact 2 seconds pause for GIF as requested
     }
 
     private fun updateAllPlayerPixelCoords() {
