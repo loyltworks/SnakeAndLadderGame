@@ -13,14 +13,48 @@
         android:orientation="vertical"
         android:weightSum="10">
 
-        <!-- Top Row -->
+        <!-- Top Header Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.0"
+            android:layout_marginTop="30dp"
+            android:layout_weight="0.8"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:id="@+id/btnReset"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/reset_icon" />
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo" />
+
+            <ImageView
+                android:id="@+id/btnHome"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/player_box_outer"
+                android:src="@drawable/home" />
+        </LinearLayout>
+
+        <!-- Top Row (Players 4 & 3) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
 
             <!-- Player 4 (Top Left) -->
             <LinearLayout
@@ -37,7 +71,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/player_box_inner"
-                    android:padding="8dp">
+                    android:padding="5dp">
 
                     <FrameLayout
                         android:id="@+id/diceContainer4"
@@ -52,7 +86,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="?"
-                            android:textColor="#513B22"
+                            android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
 
@@ -127,7 +161,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/player_box_inner"
-                    android:padding="8dp">
+                    android:padding="5dp">
 
                     <FrameLayout
                         android:id="@+id/diceContainer3"
@@ -142,7 +176,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="?"
-                            android:textColor="#513B22"
+                            android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
 
@@ -173,7 +207,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6.0"
+            android:layout_weight="5.8"
             android:background="@android:color/transparent">
 
             <com.loyltworks.snakeandladdergame.GameView
@@ -181,18 +215,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp" />
 
         </FrameLayout>
 
-        <!-- Bottom Row -->
+        <!-- Bottom Row (Players 2 & 1) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.0"
+            android:layout_weight="1.5"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:paddingHorizontal="16dp">
 
             <!-- Player 2 (Bottom Left) -->
             <LinearLayout
@@ -209,7 +246,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/player_box_inner"
-                    android:padding="8dp">
+                    android:padding="5dp">
 
                     <FrameLayout
                         android:id="@+id/diceContainer2"
@@ -224,7 +261,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="?"
-                            android:textColor="#513B22"
+                            android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
 
@@ -232,7 +269,7 @@
                             android:id="@+id/ivDiceGif2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
                     </FrameLayout>
                 </FrameLayout>
 
@@ -289,7 +326,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/player_box_inner"
-                    android:padding="8dp">
+                    android:padding="5dp">
 
                     <FrameLayout
                         android:id="@+id/diceContainer1"
@@ -304,7 +341,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:text="?"
-                            android:textColor="#513B22"
+                            android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
 
