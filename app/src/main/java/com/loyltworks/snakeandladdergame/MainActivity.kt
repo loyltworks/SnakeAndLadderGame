@@ -20,11 +20,15 @@ import android.app.Dialog
 import android.view.Window
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
+import android.widget.FrameLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var gameView: GameView
-    private var tvStatus: TextView? = null
+    private var layoutAchievement: View? = null
+    private var roundedFram: FrameLayout? = null
+    private var ivAchievementGif: ImageView? = null
+    private var tvAchievementMessage: TextView? = null
     
     // Player boxes and UI elements
     private val playerBoxes = arrayOfNulls<View>(4)
@@ -77,7 +81,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         gameView = findViewById(R.id.gameView)
-        tvStatus = findViewById(R.id.tvStatus)
+        layoutAchievement = findViewById(R.id.layoutAchievement)
+        roundedFram = findViewById(R.id.roundedFram)
+        ivAchievementGif = findViewById(R.id.ivAchievementGif)
+        tvAchievementMessage = findViewById(R.id.tvAchievementMessage)
         
         playerBoxes[0] = findViewById(R.id.boxPlayer1)
         playerBoxes[1] = findViewById(R.id.boxPlayer2)
@@ -275,7 +282,7 @@ class MainActivity : AppCompatActivity() {
         if (!isGameOver) {
             // Bonus turn if 1 or 6
             if (diceValue == 1 || diceValue == 6) {
-                Toast.makeText(this, "Bonus Turn!", Toast.LENGTH_SHORT).show()
+                showAchievement("bonus")
             } else {
                 currentPlayerIdx = (currentPlayerIdx + 1) % numPlayers
             }
@@ -295,10 +302,59 @@ class MainActivity : AppCompatActivity() {
 
     private fun showSnakeLadderToast(pos: Int) {
         if (snakes.containsKey(pos)) {
-            Toast.makeText(this, "Oops! A Snake!", Toast.LENGTH_SHORT).show()
+            showAchievement("snake")
         } else if (ladders.containsKey(pos)) {
-            Toast.makeText(this, "Yay! A Ladder!", Toast.LENGTH_SHORT).show()
+            showAchievement("ladder")
         }
+    }
+
+    private fun showAchievement(type: String) {
+        val bgRes: Int
+        val gifRes: Int
+        val framRes: Int
+        val message: String
+        val textColor: Int
+
+        when (type) {
+            "snake" -> {
+                bgRes = R.drawable.bg_achievement_snake
+                framRes = R.drawable.bg_achievement_snake
+                gifRes = R.drawable.sanke_oops
+                message = "OOPS!! A snake bit you"
+                textColor = Color.parseColor("#B22222")
+            }
+            "ladder" -> {
+                bgRes = R.drawable.bg_achievement_ladder
+                framRes = R.drawable.bg_circle_green
+                gifRes = R.drawable.ladder_yay
+                message = "YAY!! You got a ladder"
+                textColor = Color.parseColor("#2E7D32")
+            }
+            "bonus" -> {
+                bgRes = R.drawable.bg_achievement_bonus
+                framRes = R.drawable.bg_circle_brown
+                gifRes = R.drawable.wow
+                message = "WOW!! Another chance"
+                textColor = Color.parseColor("#8B4513")
+            }
+            else -> return
+        }
+
+        layoutAchievement?.setBackgroundResource(bgRes)
+        roundedFram?.setBackgroundResource(framRes)
+        ivAchievementGif?.setImageResource(gifRes)
+        tvAchievementMessage?.text = message
+        tvAchievementMessage?.setTextColor(textColor)
+
+        layoutAchievement?.visibility = View.VISIBLE
+        layoutAchievement?.alpha = 0f
+        layoutAchievement?.animate()?.alpha(1f)?.setDuration(300)?.start()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            layoutAchievement?.animate()?.alpha(0f)?.setDuration(300)?.withEndAction {
+                layoutAchievement?.visibility = View.INVISIBLE
+            }?.start()
+        }, 2000)
     }
 
     private fun checkWinCondition() {
@@ -343,13 +399,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateStatusUI() {
-        val currentName = if (isVSai) {
-            if (currentPlayerIdx == 0) "Your Turn" else "Computer's Turn"
-        } else {
-            "Player ${currentPlayerIdx + 1}'s Turn"
-        }
-        tvStatus?.text = currentName
-        
         // Show indicator and dice area for current player only
         for (i in 0 until 4) {
             playerIndicators[i]?.visibility = if (i == currentPlayerIdx && i < numPlayers) View.VISIBLE else View.INVISIBLE
@@ -377,6 +426,7 @@ class MainActivity : AppCompatActivity() {
             diceContainers[i]?.visibility = if (i == 0) View.VISIBLE else View.INVISIBLE
         }
         updateStatusUI()
+        layoutAchievement?.visibility = View.INVISIBLE
         gameView.setPositions(playerPos)
     }
 }
