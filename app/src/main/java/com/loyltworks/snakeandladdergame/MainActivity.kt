@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     
     // Player boxes and UI elements
     private val playerBoxes = arrayOfNulls<View>(4)
-    private val diceResultViews = arrayOfNulls<TextView>(4)
+    private val diceResultViews = arrayOfNulls<ImageView>(4)
     private val playerIndicators = arrayOfNulls<ImageView>(4)
     private val diceGifViews = arrayOfNulls<GifImageView>(4)
     private val diceContainers = arrayOfNulls<View>(4)
@@ -203,10 +203,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 textView?.visibility = View.VISIBLE
-                textView?.text = diceValue.toString()
             }
-        } else {
-            textView?.text = diceValue.toString()
         }
         
         // Hide other players' GIFs and show their "?" text, hide their dice boxes
@@ -214,7 +211,6 @@ class MainActivity : AppCompatActivity() {
             if (i != currentPlayerIdx) {
                 diceGifViews[i]?.visibility = View.GONE
                 diceResultViews[i]?.visibility = View.VISIBLE
-                diceResultViews[i]?.text = "?"
                 diceContainers[i]?.visibility = View.INVISIBLE
             }
         }
@@ -405,7 +401,6 @@ class MainActivity : AppCompatActivity() {
             // Reset state for other players
             if (i != currentPlayerIdx) {
                 diceResultViews[i]?.visibility = View.VISIBLE
-                diceResultViews[i]?.text = "?"
                 diceGifViews[i]?.visibility = View.GONE
                 diceContainers[i]?.visibility = View.INVISIBLE
             } else {
@@ -421,7 +416,6 @@ class MainActivity : AppCompatActivity() {
         isInteractionDisabled = false
         for (i in 0 until 4) {
             diceResultViews[i]?.visibility = View.VISIBLE
-            diceResultViews[i]?.text = "?"
             diceGifViews[i]?.visibility = View.GONE
             diceContainers[i]?.visibility = if (i == 0) View.VISIBLE else View.INVISIBLE
         }
