@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "SnakeAndLadderGame"
 include(":app")
+include(":snake-and-ladder-lib")
  

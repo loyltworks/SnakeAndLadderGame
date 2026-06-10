@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.loyltworks.snakeandladdergame" >
+
+    <uses-sdk android:minSdkVersion="24" />
+
+    <application>
+        <activity
+            android:name="com.loyltworks.snakeandladdergame.SplashActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SnakeAndLadderGame" />
+        <activity
+            android:name="com.loyltworks.snakeandladdergame.SelectionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SnakeAndLadderGame" />
+        <activity
+            android:name="com.loyltworks.snakeandladdergame.MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SnakeAndLadderGame" />
+    </application>
+
+</manifest>
