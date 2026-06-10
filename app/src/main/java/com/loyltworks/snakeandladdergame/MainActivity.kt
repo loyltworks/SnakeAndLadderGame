@@ -1,26 +1,25 @@
 package com.loyltworks.snakeandladdergame
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.activity.SystemBarStyle
-import android.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import pl.droidsonroids.gif.GifDrawable
 import pl.droidsonroids.gif.GifImageView
 import kotlin.random.Random
-import android.app.Dialog
-import android.view.Window
-import android.graphics.drawable.ColorDrawable
-import android.widget.Button
-import android.widget.FrameLayout
 
 class MainActivity : AppCompatActivity() {
 
