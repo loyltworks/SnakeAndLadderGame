@@ -1,0 +1,44 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:2:1-20:12
+INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:2:1-20:12
+	package
+		INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:3:5-51
+	xmlns:android
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:5:5-18:19
+activity#com.loyltworks.snakeandladdergame.SplashActivity
+ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:6:9-9:63
+	android:exported
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:8:13-37
+	android:theme
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:9:13-60
+	android:name
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:7:13-43
+activity#com.loyltworks.snakeandladdergame.SelectionActivity
+ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:10:9-13:63
+	android:exported
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:12:13-37
+	android:theme
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:13:13-60
+	android:name
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:11:13-46
+activity#com.loyltworks.snakeandladdergame.MainActivity
+ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:14:9-17:63
+	android:exported
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:16:13-37
+	android:theme
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:17:13-60
+	android:name
+		ADDED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml:15:13-41
+uses-sdk
+INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml
+INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\barath\New folder\SnakeAndLadderGame\snake-and-ladder-lib\src\main\AndroidManifest.xml
