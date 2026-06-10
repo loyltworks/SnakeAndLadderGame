@@ -590,7 +590,8 @@ class GameView @JvmOverloads constructor(
     }
 
     fun playSnakeBiteAnimation(start: Int, end: Int, playerIdx: Int, onAnimationEnd: () -> Unit) {
-        // Step 1: Show the GIF and play immediately
+        // Commented out the GIF snake animation
+        /*
         activeSnakeHead = start
         val gif = snakeGifs[start]
         activeSnakeGif = gif
@@ -602,46 +603,38 @@ class GameView @JvmOverloads constructor(
         gif?.setVisible(true, true)
         gif?.start()
         postInvalidateOnAnimation()
+        */
 
-        // Step 2: Delay slightly before shrinking player to sync with snake mouth opening
-        postDelayed({
-            val shrinkAnim = ValueAnimator.ofFloat(1f, 0f)
-            shrinkAnim.duration = 500L
-            shrinkAnim.addUpdateListener { animation ->
-                playerScales[playerIdx] = animation.animatedValue as Float
-                invalidate()
-            }
-            shrinkAnim.start()
-        }, 300L) // 300ms delay allows the snake to open its mouth before player shrinks
-        
-        // Step 3: Wait for 2 seconds (total GIF time)
-        postDelayed({
-            // Step 4: Teleport player to tail
-            playerPos[playerIdx] = end
-            playerCoords[playerIdx] = getCoords(end)
-            
-            // Step 5: Hide GIF and stop it
-            activeSnakeHead = null
-            activeSnakeGif?.stop()
-            activeSnakeGif = null
+        // Step 1: Shrink player at the head of the snake
+        val shrinkAnim = ValueAnimator.ofFloat(1f, 0f)
+        shrinkAnim.duration = 500L
+        shrinkAnim.addUpdateListener { animation ->
+            playerScales[playerIdx] = animation.animatedValue as Float
             invalidate()
-
-            // Step 6: Grow player at tail (0.5s)
-            val growAnim = ValueAnimator.ofFloat(0f, 1f)
-            growAnim.duration = 500L
-            growAnim.addUpdateListener { anim ->
-                playerScales[playerIdx] = anim.animatedValue as Float
+        }
+        shrinkAnim.addListener(object : android.animation.AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                // Step 2: Teleport player to tail
+                playerPos[playerIdx] = end
+                playerCoords[playerIdx] = getCoords(end)
                 invalidate()
-            }
-            
-            growAnim.addListener(object : android.animation.AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: android.animation.Animator) {
-                    onAnimationEnd()
+
+                // Step 3: Grow player at tail
+                val growAnim = ValueAnimator.ofFloat(0f, 1f)
+                growAnim.duration = 500L
+                growAnim.addUpdateListener { anim ->
+                    playerScales[playerIdx] = anim.animatedValue as Float
+                    invalidate()
                 }
-            })
-            growAnim.start()
-            
-        }, 2000L) // Exact 2 seconds pause for GIF as requested
+                growAnim.addListener(object : android.animation.AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(anim: android.animation.Animator) {
+                        onAnimationEnd()
+                    }
+                })
+                growAnim.start()
+            }
+        })
+        shrinkAnim.start()
     }
 
     private fun updateAllPlayerPixelCoords() {

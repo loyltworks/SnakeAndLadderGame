@@ -72,12 +72,12 @@
                         android:background="@drawable/dice_face_bg"
                         android:visibility="invisible">
 
-                        <TextView
+                        <ImageView
                             android:id="@+id/tvDiceResult4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="?"
+                            android:src="@drawable/defalut_dice"
                             android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -114,7 +114,7 @@
                     android:id="@+id/ivLogdo"
                     android:layout_width="100dp"
                     android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     android:src="@drawable/logo" />
@@ -130,22 +130,6 @@
                     android:visibility="invisible"
                     app2:tint="#9C27B0" />
 
-                <!-- Turn Status Indicator moved to header -->
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:shadowColor="#000000"
-                    android:shadowDx="1"
-                    android:shadowDy="1"
-                    android:shadowRadius="2"
-                    android:text="Player 1's Turn"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
                 <ImageView
                     android:id="@+id/ivPlayIndicator3"
                     android:layout_width="24dp"
@@ -156,45 +140,6 @@
                     android:src="@android:drawable/ic_media_play"
                     android:visibility="invisible"
                     app2:tint="#4CAF50" />
-
-                <!-- Custom Achievement Message Container -->
-                <LinearLayout
-                    android:id="@+id/layoutAchievement"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/bg_achievement_ladder"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="5dp"
-                    android:visibility="visible">
-
-                    <FrameLayout
-                        android:id="@+id/roundedFram"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/bg_circle_green"
-                        android:padding="2dp">
-
-                        <ImageView
-                            android:id="@+id/ivAchievementGif"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ladder_yay" />
-                    </FrameLayout>
-
-                    <TextView
-                        android:id="@+id/tvAchievementMessage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="serif"
-                        android:text="YAY!! You got a ladder"
-                        android:textColor="#2E7D32"
-                        android:textSize="10sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
 
             </RelativeLayout>
 
@@ -225,12 +170,12 @@
                         android:background="@drawable/dice_face_bg"
                         android:visibility="invisible">
 
-                        <TextView
+                        <ImageView
                             android:id="@+id/tvDiceResult3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="?"
+                            android:src="@drawable/defalut_dice"
                             android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -277,16 +222,12 @@
 
         </FrameLayout>
 
-        <!-- Bottom Row (Players 2 & 1) -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="20dp"
             android:layout_weight="1.6"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp">
-
             <!-- Player 2 (Bottom Left) -->
             <LinearLayout
                 android:id="@+id/boxPlayer2"
@@ -311,12 +252,12 @@
                         android:background="@drawable/dice_face_bg"
                         android:visibility="invisible">
 
-                        <TextView
+                        <ImageView
                             android:id="@+id/tvDiceResult2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="?"
+                            android:src="@drawable/defalut_dice"
                             android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -342,36 +283,99 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/ivPlayIndicator2"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="4dp"
-                android:rotation="180"
-                android:src="@android:drawable/ic_media_play"
-                android:visibility="invisible"
-                app2:tint="#2196F3" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="100dp">
 
-            <!-- Flexible Space to push Player 1 to the right -->
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                <ImageView
+                    android:id="@+id/ivPlayIndicator2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="4dp"
+                    android:rotation="180"
+                    android:src="@android:drawable/ic_media_play"
+                    android:visibility="invisible"
+                    app2:tint="#2196F3" />
 
-            <ImageView
-                android:id="@+id/ivPlayIndicator1"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="4dp"
-                android:src="@android:drawable/ic_media_play"
-                android:visibility="invisible"
-                app2:tint="#F44336" />
+                <!-- Turn Status Indicator moved to header -->
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="Player 1's Turn"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivPlayIndicator1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="4dp"
+                    android:src="@android:drawable/ic_media_play"
+                    android:visibility="invisible"
+                    app2:tint="#F44336" />
+
+                <!-- Custom Achievement Message Container -->
+                <LinearLayout
+                    android:id="@+id/layoutAchievement"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bg_achievement_ladder"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="visible">
+
+                    <FrameLayout
+                        android:id="@+id/roundedFram"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/bg_circle_green"
+                        android:padding="2dp">
+
+                        <ImageView
+                            android:id="@+id/ivAchievementGif"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ladder_yay" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tvAchievementMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="serif"
+                        android:text="YAY!! You got a ladder"
+                        android:textColor="#2E7D32"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <!-- Player 1 (Bottom Right) -->
             <LinearLayout
                 android:id="@+id/boxPlayer1"
                 android:layout_width="100dp"
                 android:layout_height="125dp"
+                android:layout_alignParentEnd="true"
                 android:background="@drawable/player_box_outer"
                 android:orientation="vertical"
                 android:padding="8dp">
@@ -391,12 +395,12 @@
                         android:background="@drawable/dice_face_bg"
                         android:visibility="invisible">
 
-                        <TextView
+                        <ImageView
                             android:id="@+id/tvDiceResult1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="?"
+                            android:src="@drawable/defalut_dice"
                             android:textColor="#B89366"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -422,7 +426,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 

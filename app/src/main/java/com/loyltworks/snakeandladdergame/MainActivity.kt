@@ -1,26 +1,25 @@
 package com.loyltworks.snakeandladdergame
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.activity.SystemBarStyle
-import android.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import pl.droidsonroids.gif.GifDrawable
 import pl.droidsonroids.gif.GifImageView
 import kotlin.random.Random
-import android.app.Dialog
-import android.view.Window
-import android.graphics.drawable.ColorDrawable
-import android.widget.Button
-import android.widget.FrameLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     
     // Player boxes and UI elements
     private val playerBoxes = arrayOfNulls<View>(4)
-    private val diceResultViews = arrayOfNulls<TextView>(4)
+    private val diceResultViews = arrayOfNulls<ImageView>(4)
     private val playerIndicators = arrayOfNulls<ImageView>(4)
     private val diceGifViews = arrayOfNulls<GifImageView>(4)
     private val diceContainers = arrayOfNulls<View>(4)
@@ -203,10 +202,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 e.printStackTrace()
                 textView?.visibility = View.VISIBLE
-                textView?.text = diceValue.toString()
             }
-        } else {
-            textView?.text = diceValue.toString()
         }
         
         // Hide other players' GIFs and show their "?" text, hide their dice boxes
@@ -214,7 +210,6 @@ class MainActivity : AppCompatActivity() {
             if (i != currentPlayerIdx) {
                 diceGifViews[i]?.visibility = View.GONE
                 diceResultViews[i]?.visibility = View.VISIBLE
-                diceResultViews[i]?.text = "?"
                 diceContainers[i]?.visibility = View.INVISIBLE
             }
         }
@@ -405,7 +400,6 @@ class MainActivity : AppCompatActivity() {
             // Reset state for other players
             if (i != currentPlayerIdx) {
                 diceResultViews[i]?.visibility = View.VISIBLE
-                diceResultViews[i]?.text = "?"
                 diceGifViews[i]?.visibility = View.GONE
                 diceContainers[i]?.visibility = View.INVISIBLE
             } else {
@@ -421,7 +415,6 @@ class MainActivity : AppCompatActivity() {
         isInteractionDisabled = false
         for (i in 0 until 4) {
             diceResultViews[i]?.visibility = View.VISIBLE
-            diceResultViews[i]?.text = "?"
             diceGifViews[i]?.visibility = View.GONE
             diceContainers[i]?.visibility = if (i == 0) View.VISIBLE else View.INVISIBLE
         }
