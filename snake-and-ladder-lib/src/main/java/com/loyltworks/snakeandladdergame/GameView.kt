@@ -12,9 +12,7 @@ import android.view.animation.LinearInterpolator
 import androidx.core.content.ContextCompat
 import pl.droidsonroids.gif.GifDrawable
 
-class GameView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+class GameView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
 
     private val boardSize = 10
     private var cellWidth = 0f
