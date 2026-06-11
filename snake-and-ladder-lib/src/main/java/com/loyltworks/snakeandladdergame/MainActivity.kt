@@ -63,12 +63,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            // Only apply side and bottom padding. Top padding is handled by the layout header or removed for tighter fit.
-            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.snake_activity_main)
+        val rootView = findViewById<View>(R.id.main)
+        if (rootView != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                // Only apply side and bottom padding. Top padding is handled by the layout header or removed for tighter fit.
+                v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
+                insets
+            }
         }
 
         // Header buttons
@@ -362,7 +365,7 @@ class MainActivity : AppCompatActivity() {
     private fun showWinDialog(winnerIdx: Int) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_win)
+        dialog.setContentView(R.layout.snake_dialog_win)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(false)
 
