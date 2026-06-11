@@ -88,6 +88,7 @@ class GameView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
     
     private var animators = arrayOfNulls<ValueAnimator>(4)
 
+
     private val snakes = mapOf(
         98 to 2,   // Red
         85 to 52,  // Green
