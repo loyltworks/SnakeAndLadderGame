@@ -55,7 +55,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = if (project.group.toString() == "unspecified" || project.group.toString().isEmpty()) "com.github.loyltworks" else project.group.toString()
             artifactId = "snakeandladder"
-            version = if (project.version.toString() == "unspecified") "1.0.3" else project.version.toString()
+            version = if (project.version.toString() == "unspecified") "1.0.4" else project.version.toString()
 
             afterEvaluate {
                 from(components["release"])
