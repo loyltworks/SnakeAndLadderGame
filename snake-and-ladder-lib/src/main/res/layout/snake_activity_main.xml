@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_img"
+    android:background="@drawable/snake_background_img"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -36,7 +36,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/player_box_outer"
-                android:src="@drawable/home" />
+                android:src="@drawable/game_home" />
         </RelativeLayout>
 
         <!-- Top Row (Players 4 & 3) -->
@@ -117,7 +117,7 @@
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/logo" />
+                    android:src="@drawable/snake_logo" />
 
                 <ImageView
                     android:id="@+id/ivPlayIndicator4"

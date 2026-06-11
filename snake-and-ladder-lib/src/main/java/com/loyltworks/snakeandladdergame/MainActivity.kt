@@ -331,7 +331,7 @@ class MainActivity : AppCompatActivity() {
             "bonus" -> {
                 bgRes = R.drawable.bg_achievement_bonus
                 framRes = R.drawable.bg_circle_brown
-                gifRes = R.drawable.wow
+                gifRes = R.drawable.game_wow
                 message = "WOW!! Another chance"
                 textColor = Color.parseColor("#8B4513")
             }

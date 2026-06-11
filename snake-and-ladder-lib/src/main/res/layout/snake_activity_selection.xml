@@ -5,7 +5,7 @@
     android:id="@+id/selection_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_img"
+    android:background="@drawable/snake_background_img"
     tools:context=".SelectionActivity">
 
     <FrameLayout
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="@drawable/home" />
+            android:src="@drawable/game_home" />
     </FrameLayout>
 
     <!-- Content Layout -->
@@ -57,7 +57,7 @@
             android:layout_marginTop="120dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/logo" />
+            android:src="@drawable/snake_logo" />
 
         <!-- Mode Selection Layout -->
         <LinearLayout
@@ -133,7 +133,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/computer" />
+                            android:src="@drawable/snake_computer" />
                     </FrameLayout>
 
                     <TextView
