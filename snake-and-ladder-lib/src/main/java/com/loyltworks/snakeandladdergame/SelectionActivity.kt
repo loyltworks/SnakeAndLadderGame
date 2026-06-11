@@ -15,7 +15,7 @@ class SelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
-        setContentView(R.layout.activity_selection)
+        setContentView(R.layout.snake_activity_selection)
 
         val layoutModeSelection = findViewById<View>(R.id.layoutModeSelection)
         val layoutPlayerSelection = findViewById<View>(R.id.layoutPlayerSelection)
