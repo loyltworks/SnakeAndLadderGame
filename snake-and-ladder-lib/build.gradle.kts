@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
     id("maven-publish")
 }
 
@@ -26,6 +27,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 
     publishing {
         singleVariant("release") {
@@ -51,7 +55,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = if (project.group.toString() == "unspecified" || project.group.toString().isEmpty()) "com.github.loyltworks" else project.group.toString()
             artifactId = "snakeandladder"
-            version = if (project.version.toString() == "unspecified") "1.0.0" else project.version.toString()
+            version = if (project.version.toString() == "unspecified") "1.0.1" else project.version.toString()
 
             afterEvaluate {
                 from(components["release"])
