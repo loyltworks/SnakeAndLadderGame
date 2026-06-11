@@ -82,6 +82,7 @@ class GameView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         }
     }
 
+
     private var playerPos = IntArray(4) { 1 }
     private var playerCoords = Array(4) { Pair(0f, 0f) }
     private var playerScales = FloatArray(4) { 1f }
